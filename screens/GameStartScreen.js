@@ -3,6 +3,8 @@ import { View, Text, Button, StyleSheet, TouchableWithoutFeedback, Keyboard, Ale
 import Card from '../components/Card'
 import Colors from '../constants/Colors'
 import Input from '../components/Input'
+import NumberContainer from '../components/NumberContainer'
+import ButtonContainer from '../components/ButtonContainer'
 
 const GameStartScreen = props => {
 
@@ -28,11 +30,17 @@ const GameStartScreen = props => {
     setConfirmed(true);
     setInput(''); 
     setSelectedNumber(chosenNumber); // We can still access the input's value which is not empty
+    Keyboard.dismiss();
   }
 
   let confirmedOutput;
   if(confirmed) {
-    confirmedOutput = <Text>Chosen Number is {selectedNumber}</Text>
+    confirmedOutput =
+      <Card style={styles.startGame}>
+        <Text>Chosen Number is</Text>
+        <NumberContainer>{selectedNumber}</NumberContainer>
+        <Button title="Start Game" color={Colors.primary} onPress= {() => props.startGameHandler(selectedNumber)} />
+      </Card>
   }
 
   return (
@@ -42,14 +50,14 @@ const GameStartScreen = props => {
       <Card style={styles.inputContainer}>
         <Text>Select a Number</Text>
         <Input value={input} keyboardType="number-pad" maxLength={2} style={styles.input} onChangeText={inputHandler} />
-        <View style={styles.buttonContainer} >
+        <ButtonContainer>
           <View style={styles.button}>
             <Button title="Confirm" color={Colors.primary} onPress={confirmHandler} />
           </View>
           <View style={styles.button} >
             <Button title="Reset" color="grey" onPress={resetHandler} />
           </View>
-        </View>
+        </ButtonContainer>
       </Card>
       {confirmedOutput}
     </View>
@@ -76,14 +84,14 @@ const styles = StyleSheet.create({
     width: 50,
     textAlign: 'center'
   },
-  buttonContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15
-  },
   button: {
       width: '40%'
+  },
+  startGame: {
+    width: 300,
+    maxWidth: '80%',
+    alignItems: 'center',
+    marginTop: 20
   }
 });
 
