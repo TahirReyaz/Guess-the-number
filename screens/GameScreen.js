@@ -4,6 +4,7 @@ import NumberContainer from '../components/NumberContainer'
 import Card from '../components/Card'
 import ButtonContainer from '../components/ButtonContainer'
 import Colors from '../constants/Colors'
+import defaultStyles from '../constants/default-styles'
 
 const numberGenerator = (min, max, exclude) => {
     min = Math.ceil(min);
@@ -45,7 +46,7 @@ const GameScreen = props => {
 
   return (
     <View style={styles.screen}>
-      <Text style={styles.title}>Guess</Text>
+      <Text style={defaultStyles.title}>Guess</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <ButtonContainer style={styles.buttonContainer}>
@@ -62,21 +63,17 @@ const GameScreen = props => {
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        padding: 10,
-        alignItems: 'center'
-    },
-    title: {
-      fontSize: 20,
-      marginVertical: 10
-    },
-    buttonContainer: {
-      width: '80%'
-    },
-    button: {
-      width: '40%'
-    }
+  screen: {
+    flex: 1,
+    padding: 10,
+    alignItems: 'center',
+  },
+  buttonContainer: {
+    width: '80%'
+  },
+  button: {
+    width: '40%'
+  }
 });
 
 export default GameScreen;

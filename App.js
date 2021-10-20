@@ -1,14 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
 import Header from './components/Header';
 import GameStartScreen from './screens/GameStartScreen';
 import GameScreen from './screens/GameScreen';
-import GameOverScreen from './screens/GameOverScreen'
+import GameOverScreen from './screens/GameOverScreen';
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+  });
+};
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [totalRounds, setTotalRounds] = useState(0);
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  if(!fontLoaded) {
+    return (
+      <AppLoading 
+        startAsync={fetchFonts} 
+        onFinish={() => setFontLoaded(true)} 
+        onError={(err) => console.log(err)} 
+      />
+    );
+  }
 
   const startGame = selectedNumber => {
     setUserNumber(selectedNumber);
@@ -18,7 +38,8 @@ export default function App() {
     setTotalRounds(num);
   }
   const newGame = () => {
-    setUserNumber();
+    setTotalRounds(0);
+    setUserNumber(null);
     screen = <GameStartScreen startGameHandler={startGame} />;
   }
 
@@ -26,7 +47,7 @@ export default function App() {
   if(userNumber && totalRounds <= 0) {
     screen = <GameScreen correctNumber={userNumber} onWin={endGame} />;
   } else if(totalRounds > 0) {
-    screen = <GameOverScreen num={totalRounds} onNewGame={newGame} />
+    screen = <GameOverScreen guesses={totalRounds} num={userNumber} onNewGame={newGame} />
   }
 
   return (
