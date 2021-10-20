@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button, StyleSheet } from 'react-native'
+import { View, Text, Button, Image, StyleSheet } from 'react-native'
 import Colors from '../constants/Colors';
 
 const GameOverScreen = props => {
@@ -7,6 +7,7 @@ const GameOverScreen = props => {
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Game Over</Text>
+      <Image style={styles.img} resizeMode='contain' source={require('../assets/images/gameover.png')} />
       <Text>Total number of rounds: {props.guesses}</Text>
       <Text>The number was {props.num}</Text>
       <View style={styles.button}>
@@ -30,6 +31,10 @@ const styles = StyleSheet.create({
   button: {
     width: '40%',
     marginVertical: 10
+  },
+  img: {
+    width: '100%',
+    height: 200
   }
 });
 

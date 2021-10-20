@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import Colors from '../constants/Colors';
 
 const NumberContainer = props => {
 
@@ -18,8 +17,11 @@ const styles = StyleSheet.create({
       marginVertical: 10
   },
   number: {
-      color: Colors.primary,
-      fontSize: 22
+      color: 'white',
+      fontSize: 80,
+      textShadowColor: 'rgba(0, 0, 0, 0.5)',
+      textShadowOffset: {width: -1, height: 1},
+      textShadowRadius: 10
   }
 });
 

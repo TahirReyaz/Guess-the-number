@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { View, Text, Button, Alert, StyleSheet } from 'react-native'
+import { View, Text, Alert, StyleSheet } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import NumberContainer from '../components/NumberContainer'
 import Card from '../components/Card'
 import ButtonContainer from '../components/ButtonContainer'
-import Colors from '../constants/Colors'
+import MainButton from '../components/MainButton'
 import defaultStyles from '../constants/default-styles'
 
 const numberGenerator = (min, max, exclude) => {
@@ -50,12 +51,12 @@ const GameScreen = props => {
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <ButtonContainer style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button title="Lower" color={Colors.primary} onPress={nextGuessHandler.bind(this, 'lower')} />
-          </View>
-          <View style={styles.button}>
-            <Button title="Higher" color={Colors.primary} onPress={nextGuessHandler.bind(this, 'higher')} />
-          </View>
+          <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
+            <Ionicons name="md-remove" color="white" size={24} />          
+          </MainButton>
+          <MainButton onPress={nextGuessHandler.bind(this, 'higher')}>
+            <Ionicons name="md-add" color="white" size={24} />          
+          </MainButton>
         </ButtonContainer>
       </Card>
     </View>
