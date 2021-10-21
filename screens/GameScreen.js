@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { View, Text, Alert, StyleSheet } from 'react-native'
+import { View, Text, Alert, ScrollView, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import NumberContainer from '../components/NumberContainer'
 import Card from '../components/Card'
@@ -18,16 +18,24 @@ const numberGenerator = (min, max, exclude) => {
     }
 }
 
+const renderListItem = (value, numOfRound) => (
+  <View key={value} style={styles.listItem}>
+    <Text>#{numOfRound}</Text>
+    <Text>{value}</Text>
+  </View>
+);
+
 const GameScreen = props => {
-  const [currentGuess, setCurrentGuess] = useState(numberGenerator(1, 100, props.correctNumber));
+  const initialGuess = numberGenerator(1, 100, props.correctNumber);
+  const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const currentMin = useRef(1), currentMax = useRef(100);
-  const [rounds, setRounds] = useState(0);
+  const [pastGuesses, setPastGuesses] = useState([initialGuess]);
 
   const { correctNumber, onWin} = props;
 
   useEffect(() => {
     if(currentGuess === correctNumber) {
-      onWin(rounds);
+      onWin(pastGuesses.length);
     }
   }, [currentGuess, correctNumber, onWin])
 
@@ -39,10 +47,11 @@ const GameScreen = props => {
     if(dir === 'lower') {
       currentMax.current = currentGuess;
     } else {
-      currentMin.current = currentGuess;
+      currentMin.current = currentGuess + 1;
     }
-    setRounds(curRounds => curRounds + 1);
-    setCurrentGuess(numberGenerator(currentMin.current, currentMax.current, currentGuess));
+    const nextNumber = numberGenerator(currentMin.current, currentMax.current, currentGuess);
+    setPastGuesses(curPastGuesses => [nextNumber, ...curPastGuesses]);
+    setCurrentGuess(nextNumber);
   }
 
   return (
@@ -59,6 +68,11 @@ const GameScreen = props => {
           </MainButton>
         </ButtonContainer>
       </Card>
+      <View style={styles.list}>
+        <ScrollView>
+          {pastGuesses.map((guess, i) => renderListItem(guess, pastGuesses.length - i))}
+        </ScrollView>
+      </View>
     </View>
   );
 }
@@ -74,6 +88,19 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '40%'
+  },
+  list: {
+    width: '80%',
+    flex: 1
+  },
+  listItem: {
+    borderColor: '#ccc',
+    borderWidth: 1,
+    padding: 15,
+    marginVertical: 10,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 });
 
