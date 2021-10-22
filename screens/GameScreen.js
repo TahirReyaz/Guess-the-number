@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { View, Text, Alert, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, Alert, ScrollView, Dimensions, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import NumberContainer from '../components/NumberContainer'
 import Card from '../components/Card'
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     width: '80%'
   },
   button: {
-    width: '40%'
+    width: Dimensions.get('window').width * 0.4
   },
   list: {
     width: '80%',
