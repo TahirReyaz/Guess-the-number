@@ -1,10 +1,11 @@
 import React from 'react'
-import { View, Text, Button, Image, StyleSheet } from 'react-native'
+import { View, Text, Button, ScrollView, Image, StyleSheet } from 'react-native'
 import Colors from '../constants/Colors';
 
 const GameOverScreen = props => {
 
   return (
+    <ScrollView>
     <View style={styles.screen}>
       <Text style={styles.title}>Game Over</Text>
       <Image style={styles.img} resizeMode='contain' source={require('../assets/images/gameover.png')} />
@@ -14,6 +15,7 @@ const GameOverScreen = props => {
         <Button title="New Game" color={Colors.primary} onPress={props.onNewGame} />
       </View>
     </View>
+    </ScrollView>
   );
 }
 

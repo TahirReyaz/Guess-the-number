@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import Header from './components/Header';
@@ -51,11 +51,11 @@ export default function App() {
   }
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <StatusBar style="auto" />
       <Header title="GUESS THE NUMBER" />
       {screen}
-    </View>
+    </SafeAreaView>
   );
 }
 
