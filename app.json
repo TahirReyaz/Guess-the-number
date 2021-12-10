@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "guess-the-number",
+    "name": "Guess the number",
     "slug": "guess-the-number",
     "version": "1.0.0",
     "orientation": "default",
@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#171717"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,12 +17,16 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.tahirreyaz.rn.guess-the-number",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.tahirreyaz.rn.guess_the_number",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#171717"
       }
     },
     "web": {
